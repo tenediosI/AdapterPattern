@@ -140,12 +140,12 @@ class SevensTest {
     }
     @Test
     void playAdapter() {
-    	CardGame newSevens = new Sevens("C7");
+    	CardGame newSevens = new Sevens("C7,C8,C9,D2,D5");
     	ConsoleOutput consoleOutput = new ConsoleOutput();
     	ConsoleInput consoleInput = new ConsoleInput(consoleOutput);
     	InputTestAdapter inputTestAdapter = new InputTestAdapter(consoleInput);
     	inputTestAdapter.setString("Rob");
-    	inputTestAdapter.setInteger(2);
+    	inputTestAdapter.setInteger(3);
     	inputTestAdapter.setCardRaw("C7");
     	newSevens.setInput(inputTestAdapter);
     	newSevens.setFinishGame(true);
