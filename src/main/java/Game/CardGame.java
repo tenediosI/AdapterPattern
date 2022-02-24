@@ -5,8 +5,8 @@ import java.util.List;
 
 import Structure.*;
 import Console.ConsoleOutput;
+import Console.Input;
 import Console.ConsoleInput;
-import Structure.LoadConfig;
 
 public class CardGame {
 
@@ -17,8 +17,13 @@ public class CardGame {
     protected ConsoleInput userInput = new ConsoleInput(userOutput);
     protected boolean finshGame = false;
     private LoadConfig loadConfig = new LoadConfig();
+    LoadTestAdapter loadTestAdapter = new LoadTestAdapter(loadConfig);
+    protected Input input;
 
-
+    public void setInput(Input input) {
+        this.input = input;
+    }
+    
     public void setNoOfCards(Integer noOfCards) {
         this.noOfCards = noOfCards;
     }
@@ -27,8 +32,8 @@ public class CardGame {
         this.finshGame = finshGame;
     }
 
-    public void setLoadConfig(LoadConfig loadConfig){
-        this.loadConfig = loadConfig;
+    public void setLoadConfig(LoadTestAdapter loadTestAdapter){
+        this.loadTestAdapter = loadTestAdapter;
     }
 
     public void setUserInput(ConsoleInput userInput){
@@ -71,12 +76,12 @@ public class CardGame {
 
     protected void createHumanPlayer(){
         output("What is your name");
-        String name = getString();
+        String name = input.getString();
         players.add(new Player(PlayerType.USER,name,0));
     }
 
     protected List<String> getComputerPlayersNames(){
-        return loadConfig.getConfig();
+        return loadTestAdapter.getConfig();
     }
 
     protected void createComputerPlayers(Integer noOfComputerPlayers) {
@@ -92,7 +97,7 @@ public class CardGame {
         int noOfPlayers = 0;
         while ( noOfPlayers < 1 || noOfPlayers > 8) {
             output("How many computer players, minimum of one and max eight?");
-            noOfPlayers = getInteger();
+            noOfPlayers = input.getInteger();
         }
         return noOfPlayers;
     }

@@ -6,6 +6,10 @@ import Structure.Hand;
 import Structure.Suit;
 import org.junit.jupiter.api.Test;
 
+import Console.ConsoleInput;
+import Console.ConsoleOutput;
+import Console.InputTestAdapter;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SevensTest {
@@ -133,5 +137,19 @@ class SevensTest {
     void canNotPlayACardHeartNineHandH7(){
         this.sevensTableHands[Suit.HEARTS.ordinal()].add(new Card("H7"));
         assertFalse(sevens.canPlayACard(new Card("H9"), sevensTableHands));
+    }
+    @Test
+    void playAdapter() {
+    	CardGame newSevens = new Sevens("C7");
+    	ConsoleOutput consoleOutput = new ConsoleOutput();
+    	ConsoleInput consoleInput = new ConsoleInput(consoleOutput);
+    	InputTestAdapter inputTestAdapter = new InputTestAdapter(consoleInput);
+    	inputTestAdapter.setString("Rob");
+    	inputTestAdapter.setInteger(2);
+    	inputTestAdapter.setCardRaw("C7");
+    	newSevens.setInput(inputTestAdapter);
+    	newSevens.setFinishGame(true);
+    	newSevens.play();
+    	assertEquals(0,newSevens.determineWinner(newSevens.players).getHand().size());
     }
 }

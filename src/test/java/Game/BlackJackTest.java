@@ -1,6 +1,8 @@
 package Game;
 
 import Console.ConsoleInput;
+import Console.ConsoleOutput;
+import Console.InputTestAdapter;
 import Game.BlackJack;
 import Structure.Hand;
 import Structure.Player;
@@ -59,13 +61,17 @@ class BlackJackTest {
     }
 
     @Test
-    void playHasThreeCards(){
-        CardGame overrideBlackJack = new BlackJack("HK,HQ,CJ,CK,CQ,DJ,DK,DQ");
-        ConsoleInput mockInput = mock(ConsoleInput.class);
-        when(mockInput.getString()).thenReturn("Derek").thenReturn("T");
-        when(mockInput.getInteger()).thenReturn(2);
-        overrideBlackJack.setUserInput(mockInput);
-        overrideBlackJack.play();
-        assertEquals(3,overrideBlackJack.players.get(0).getHand().size());
+    void playHasThreeCardsAdapter(){
+    	CardGame newBlackJack = new BlackJack("HK,HQ,CJ,CK,CQ,DJ,DK,DQ");
+    	ConsoleOutput consoleOutput = new ConsoleOutput();
+    	ConsoleInput consoleInput = new ConsoleInput(consoleOutput);
+    	InputTestAdapter inputTestAdapter = new InputTestAdapter(consoleInput);
+    	inputTestAdapter.setString("Rob");
+    	inputTestAdapter.setInteger(2);
+    	inputTestAdapter.setUserAction("T");
+    	newBlackJack.setInput(inputTestAdapter);
+    	newBlackJack.setFinishGame(true);
+    	newBlackJack.play();
+    	assertEquals(3,newBlackJack.players.get(0).getHand().size());
     }
 }

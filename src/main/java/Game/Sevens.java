@@ -36,7 +36,7 @@ public class Sevens extends CardGame {
         String userCardRaw = "";
         Card userCard = null;
         while (!cardPlayed && player.getHand().size() > 0) {
-            userCardRaw = getString();
+            userCardRaw = input.getCardRaw();
             userCard = player.getHand().findACard(userCardRaw);
             if (userCard == null) {
                 if (userCardRaw.length() >= 2) {

@@ -30,7 +30,7 @@ public class BlackJack extends CardGame {
         if (player.hasHand()) {
             output(player.getHand().toString());
         }
-        userChoice = getString();
+        userChoice = input.getUserAction();
         userAction = BlackJackActions.getAction(userChoice.substring(0,1).toUpperCase());
         output("You chose " + userAction.display());
         return userAction;
